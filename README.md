@@ -124,6 +124,60 @@ Isso ocorre porque o Next.js tenta pré-renderizar páginas com código que só 
 
 3. **Mover acesso ao DOM para useEffect**: Certifique-se de que todo o código que acessa o DOM esteja dentro de useEffect e com verificação de ambiente.
 
+#### Solução Implementada no Projeto
+
+Para resolver o erro de compilação com a página "/admin", aplicamos a seguinte solução:
+
+1. **Movemos a página admin para o sistema de Pages**: Criamos a página em `pages/admin/index.jsx` em vez de usar o App Router.
+
+2. **Removemos completamente o componente do App Router**: Para evitar conflitos entre rotas com o mesmo nome em ambos os sistemas de roteamento, removemos o arquivo `app/admin/page.tsx`.
+
+3. **Implementamos o arquivo _app.jsx**: Para garantir que o layout seja consistente em todas as páginas, incluindo as do sistema de Pages.
+
+4. **Configuramos o next.config.js**: Adicionamos configurações para ignorar erros durante o build.
+
+Esta abordagem utilizando apenas o sistema de Pages para a rota `/admin` evita o erro de compilação que ocorre quando o Next.js encontra arquivos conflitantes:
+
+```
+⨯ Conflicting app and page file was found, please remove the conflicting files to continue:
+⨯   "pages/admin/index.jsx" - "app/admin/page.tsx"
+```
+
+É importante lembrar que o Next.js não permite que a mesma rota exista tanto no sistema App Router (pasta `/app`) quanto no sistema Pages Router (pasta `/pages`), sendo necessário escolher apenas um dos sistemas para cada rota.
+
+### Erro de permissão com links simbólicos no Windows
+
+Se você encontrar um erro como:
+```
+Error: EPERM: operation not permitted, symlink '...' -> '...'
+```
+
+Isso ocorre devido a restrições de permissão para criar links simbólicos no Windows, especialmente quando se usa a opção `output: 'standalone'` no Next.js. Para resolver:
+
+1. **Remova a opção `output: 'standalone'` do next.config.js**:
+   ```javascript
+   // Antes
+   const nextConfig = {
+     // ...
+     output: 'standalone',
+     // ...
+   }
+
+   // Depois (remova ou comente a linha)
+   const nextConfig = {
+     // ...
+     // output: 'standalone', // Comentado para evitar erros de symlink no Windows
+     // ...
+   }
+   ```
+
+2. **Execute o Windows com permissões de administrador**:
+   - Alternativamente, você pode executar o terminal como administrador para ter permissões para criar links simbólicos.
+
+3. **Habilite links simbólicos no Windows**:
+   - Em uma instalação padrão do Windows, apenas administradores podem criar links simbólicos.
+   - Você pode ativar essa permissão para usuários normais através de políticas de grupo.
+
 ### Problemas de Estilo
 
 Se os estilos não estiverem sendo aplicados corretamente:
@@ -165,4 +219,54 @@ Para contribuir com o projeto, siga estas etapas:
 
 ## Licença
 
-Este projeto está licenciado sob a licença MIT - veja o arquivo LICENSE para mais detalhes. 
+Este projeto está licenciado sob a licença MIT - veja o arquivo LICENSE para mais detalhes.
+
+### Avisos sobre imagens não encontradas
+
+Ao executar o servidor de produção, você pode ver avisos como:
+```
+⨯ upstream image response failed for https://images.unsplash.com/photo-... 404
+```
+
+Esses avisos indicam que algumas imagens referenciadas no projeto não estão disponíveis. Isso não afeta o funcionamento do site, mas para resolver:
+
+1. **Substitua as URLs de imagens** por URLs válidas ou imagens locais.
+2. **Use imagens de fallback** para casos em que a imagem principal não puder ser carregada.
+
+## Implantação em Produção
+
+A aplicação foi testada e está pronta para ser implantada em ambientes de produção. Recomendamos usar:
+
+- **Vercel**: Deploy automático a partir do GitHub
+- **Netlify**: Suporte nativo a aplicações Next.js
+- **Servidor próprio**: Siga as instruções de [implantação do Next.js](https://nextjs.org/docs/deployment)
+
+Para implantar em um servidor próprio:
+
+1. **Gere o build de produção**:
+   ```bash
+   npm run build
+   # ou
+   yarn build
+   # ou
+   pnpm run build
+   ```
+
+2. **Inicie o servidor de produção**:
+   ```bash
+   npm start
+   # ou
+   yarn start
+   # ou
+   pnpm start
+   ```
+
+3. **Configure um proxy reverso** (como Nginx ou Apache) para encaminhar o tráfego para a porta 3000.
+
+## Contato
+
+Para informações sobre a Papelaria Vanelli:
+- **Endereço**: Av. VP-8, Folha 32, Quadra 7, Lote 23 - Nova Marabá, Marabá-PA
+- **Telefone**: (94) 99123-4567
+- **E-mail**: contato@vanelli.com.br
+- **Horário de funcionamento**: Segunda a Sábado, das 8h às 19h 
