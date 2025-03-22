@@ -43,7 +43,8 @@ export default function AdminPage() {
 
   // Verificar autenticação
   useEffect(() => {
-    if (!isAuthenticated) {
+    // Verificar a autenticação do cliente apenas no lado do cliente
+    if (typeof window !== 'undefined' && !isAuthenticated) {
       router.push("/login")
     }
   }, [isAuthenticated, router])
@@ -66,11 +67,14 @@ export default function AdminPage() {
         setTotalPages(Math.ceil(formattedProducts.length / itemsPerPage))
       } catch (error) {
         console.error("Erro ao carregar dados:", error)
-        toast({
-          title: "Erro ao carregar dados",
-          description: "Não foi possível carregar os produtos e categorias.",
-          variant: "destructive",
-        })
+        // Chamar toast apenas no lado do cliente
+        if (typeof window !== 'undefined') {
+          toast({
+            title: "Erro ao carregar dados",
+            description: "Não foi possível carregar os produtos e categorias.",
+            variant: "destructive",
+          })
+        }
 
         // Usar dados simulados em caso de erro
         const mockProducts = generateMockProducts()
@@ -82,7 +86,10 @@ export default function AdminPage() {
       }
     }
 
-    fetchData()
+    // Executar apenas no lado do cliente
+    if (typeof window !== 'undefined') {
+      fetchData()
+    }
   }, [toast])
 
   // Filtrar produtos com base na busca

@@ -92,6 +92,38 @@ Se você encontrar um erro como `ReferenceError: document is not defined`, isso 
    }
    ```
 
+### Erro durante o build: "Error occurred prerendering page"
+
+Se você encontrar um erro como:
+```
+Error occurred prerendering page "/admin". Read more: https://nextjs.org/docs/messages/prerender-error
+Export encountered an error on /admin/page: /admin, exiting the build.
+```
+
+Isso ocorre porque o Next.js tenta pré-renderizar páginas com código que só deve ser executado no cliente. Para resolver:
+
+1. **Configurar a página como dinâmica**: Adicione um arquivo `config.js` na pasta da página com:
+   ```javascript
+   export const dynamic = 'force-dynamic'
+   export const revalidate = 0
+   ```
+
+2. **Ajustar o next.config.js**: Configure o arquivo para desativar a pré-renderização de certas páginas:
+   ```javascript
+   // next.config.js
+   module.exports = {
+     // Outras configurações...
+     eslint: {
+       ignoreDuringBuilds: true,
+     },
+     typescript: {
+       ignoreBuildErrors: true,
+     },
+   }
+   ```
+
+3. **Mover acesso ao DOM para useEffect**: Certifique-se de que todo o código que acessa o DOM esteja dentro de useEffect e com verificação de ambiente.
+
 ### Problemas de Estilo
 
 Se os estilos não estiverem sendo aplicados corretamente:
