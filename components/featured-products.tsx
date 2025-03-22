@@ -121,7 +121,29 @@ const featuredProducts = {
 export function FeaturedProducts() {
   const [activeTab, setActiveTab] = useState("populares")
   const gridRef = useRef<HTMLDivElement>(null)
-
+  
+  // Adicionar os estilos no lado do cliente usando useEffect
+  useEffect(() => {
+    // Criar elemento de estilo apenas no lado do cliente
+    const styleSheet = document.createElement("style")
+    styleSheet.textContent = `
+      .product-item {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      .product-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    `
+    document.head.appendChild(styleSheet)
+    
+    // Limpar ao desmontar o componente
+    return () => {
+      document.head.removeChild(styleSheet)
+    }
+  }, [])
+  
   useEffect(() => {
     // Reset scroll position when tab changes
     if (gridRef.current) {
@@ -214,18 +236,4 @@ export function FeaturedProducts() {
     </div>
   )
 }
-
-// Adicionar ao CSS global
-const styleSheet = document.createElement("style")
-styleSheet.textContent = `
-  .product-item {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  .product-visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`
-typeof document !== 'undefined' && document.head.appendChild(styleSheet)
 
