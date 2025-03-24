@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
+import { useRef, useState, useEffect } from "react"
 import { ChevronLeft, ChevronRight, MoveRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ProductCard } from "@/components/product-card"
@@ -9,145 +9,110 @@ import Link from "next/link"
 const products = [
   {
     id: 1,
-    name: "Caderno Espiral Universitário 10 Matérias",
-    price: 29.9,
-    image: "https://images.unsplash.com/photo-1544239265-ee5eedde5469?q=80&w=200&h=200&auto=format&fit=crop",
+    name: "Caderno A4",
+    price: 29.90,
+    image: "https://images.unsplash.com/photo-1517842645767-c639042777db?q=80&w=200&h=200&auto=format&fit=crop&ixlib=rb-4.0.3",
     discount: 15,
     badge: "Novo",
+    href: "/produto/caderno-a4"
   },
   {
     id: 2,
-    name: "Caneta Gel Colorida - Kit com 10 cores",
-    price: 24.5,
-    image: "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?q=80&w=200&h=200&auto=format&fit=crop",
+    name: "Lápis de Cor",
+    price: 19.90,
+    image: "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?q=80&w=200&h=200&auto=format&fit=crop&ixlib=rb-4.0.3",
+    href: "/produto/lapis-de-cor"
   },
   {
     id: 3,
-    name: "Estojo Escolar Duplo com Zíper",
-    price: 34.9,
-    image: "https://images.unsplash.com/photo-1596207498818-c4a9cfe8c9c5?q=80&w=200&h=200&auto=format&fit=crop",
-    discount: 10,
+    name: "Mochila Escolar",
+    price: 159.90,
+    image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a45?q=80&w=200&h=200&auto=format&fit=crop&ixlib=rb-4.0.3",
+    href: "/produto/mochila-escolar"
   },
   {
     id: 4,
-    name: "Bloco de Notas Adesivas Coloridas",
-    price: 12.9,
-    image: "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?q=80&w=200&h=200&auto=format&fit=crop",
+    name: "Estojo",
+    price: 39.90,
+    image: "https://images.unsplash.com/photo-1452860606245-08befc0ff44b?q=80&w=200&h=200&auto=format&fit=crop&ixlib=rb-4.0.3",
+    href: "/produto/estojo"
   },
   {
     id: 5,
-    name: "Lapiseira 0.7mm Profissional",
-    price: 18.5,
-    image: "https://images.unsplash.com/photo-1595073752226-5ec8bf6c6d96?q=80&w=200&h=200&auto=format&fit=crop",
-    badge: "Exclusivo",
+    name: "Borracha",
+    price: 4.90,
+    image: "https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?q=80&w=200&h=200&auto=format&fit=crop&ixlib=rb-4.0.3",
+    href: "/produto/borracha"
   },
   {
     id: 6,
-    name: "Agenda 2024 Capa Dura",
-    price: 42.9,
-    image: "https://images.unsplash.com/photo-1517842645767-c639042777db?q=80&w=200&h=200&auto=format&fit=crop",
-    discount: 20,
+    name: "Lápis",
+    price: 2.90,
+    image: "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?q=80&w=200&h=200&auto=format&fit=crop&ixlib=rb-4.0.3",
+    href: "/produto/lapis"
   },
   {
     id: 7,
-    name: "Kit Marcadores Permanentes",
-    price: 27.9,
-    image: "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?q=80&w=200&h=200&auto=format&fit=crop",
+    name: "Caneta",
+    price: 3.90,
+    image: "https://images.unsplash.com/photo-1517842645767-c639042777db?q=80&w=200&h=200&auto=format&fit=crop&ixlib=rb-4.0.3",
+    href: "/produto/caneta"
   },
   {
     id: 8,
-    name: "Mochila Escolar Resistente à Água",
-    price: 89.9,
-    image: "https://images.unsplash.com/photo-1577401239170-897942555fb3?q=80&w=200&h=200&auto=format&fit=crop",
-    discount: 5,
-    badge: "Top",
-  },
+    name: "Apontador",
+    price: 5.90,
+    image: "https://images.unsplash.com/photo-1452860606245-08befc0ff44b?q=80&w=200&h=200&auto=format&fit=crop&ixlib=rb-4.0.3",
+    href: "/produto/apontador"
+  }
 ]
 
 export function ProductCarousel() {
   const containerRef = useRef<HTMLDivElement>(null)
   const [canScrollLeft, setCanScrollLeft] = useState(false)
-  const [canScrollRight, setCanScrollRight] = useState(true)
-  const [activeIndex, setActiveIndex] = useState(0)
+  const [canScrollRight, setCanScrollRight] = useState(false)
   const [isScrolling, setIsScrolling] = useState(false)
-  const itemsPerPage = 4 // Para diferentes tamanhos de tela, podemos usar valores diferentes
-  const totalPages = Math.ceil(products.length / itemsPerPage)
 
   const checkScrollButtons = () => {
-    if (containerRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = containerRef.current
-      setCanScrollLeft(scrollLeft > 0)
-      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10)
-      
-      // Calcular o índice atual com base na posição de rolagem
-      const newIndex = Math.round(scrollLeft / (clientWidth / itemsPerPage))
-      if (newIndex !== activeIndex) {
-        setActiveIndex(newIndex)
-      }
-    }
+    if (!containerRef.current) return
+
+    const { scrollLeft, scrollWidth, clientWidth } = containerRef.current
+    setCanScrollLeft(scrollLeft > 0)
+    setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1)
   }
 
   useEffect(() => {
-    const container = containerRef.current
-    if (container) {
-      container.addEventListener("scroll", checkScrollButtons)
-      window.addEventListener("resize", checkScrollButtons)
-      checkScrollButtons()
-      return () => {
-        container.removeEventListener("scroll", checkScrollButtons)
-        window.removeEventListener("resize", checkScrollButtons)
-      }
-    }
+    checkScrollButtons()
+    window.addEventListener("resize", checkScrollButtons)
+    return () => window.removeEventListener("resize", checkScrollButtons)
   }, [])
 
   const scrollLeft = () => {
-    if (containerRef.current) {
-      setIsScrolling(true)
-      const { clientWidth } = containerRef.current
-      containerRef.current.scrollBy({ left: -clientWidth, behavior: "smooth" })
-      setTimeout(() => setIsScrolling(false), 500)
-    }
+    if (!containerRef.current) return
+    setIsScrolling(true)
+    containerRef.current.scrollBy({
+      left: -300,
+      behavior: "smooth"
+    })
+    setTimeout(() => setIsScrolling(false), 500)
   }
 
   const scrollRight = () => {
-    if (containerRef.current) {
-      setIsScrolling(true)
-      const { clientWidth } = containerRef.current
-      containerRef.current.scrollBy({ left: clientWidth, behavior: "smooth" })
-      setTimeout(() => setIsScrolling(false), 500)
-    }
-  }
-
-  const scrollToPage = (index: number) => {
-    if (containerRef.current) {
-      setIsScrolling(true)
-      const { clientWidth } = containerRef.current
-      const scrollAmount = (clientWidth / itemsPerPage) * index * itemsPerPage
-      containerRef.current.scrollTo({ left: scrollAmount, behavior: "smooth" })
-      setTimeout(() => setIsScrolling(false), 500)
-    }
+    if (!containerRef.current) return
+    setIsScrolling(true)
+    containerRef.current.scrollBy({
+      left: 300,
+      behavior: "smooth"
+    })
+    setTimeout(() => setIsScrolling(false), 500)
   }
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h3 className="text-lg font-medium text-primary hidden sm:block">Produtos recém-chegados</h3>
-        <div className="flex items-center gap-2">
-          <div className="hidden md:flex gap-1">
-            {Array.from({ length: totalPages }).map((_, index) => (
-              <button
-                key={index}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  index === Math.floor(activeIndex / itemsPerPage)
-                    ? "bg-primary w-6"
-                    : "bg-gray-300 hover:bg-gray-400"
-                }`}
-                onClick={() => scrollToPage(index)}
-                aria-label={`Página ${index + 1}`}
-              />
-            ))}
-          </div>
-          <div className="flex gap-2">
+    <div className="relative">
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-2xl font-bold">Novidades</h2>
+        <div className="flex items-center">
+          <div className="flex space-x-2 mr-4">
             <Button
               variant="outline"
               size="icon"
@@ -222,4 +187,3 @@ export function ProductCarousel() {
     </div>
   )
 }
-

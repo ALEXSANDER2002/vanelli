@@ -17,7 +17,7 @@ export default function Home() {
         <section className="relative">
           <div className="relative h-[500px] w-full overflow-hidden bg-gradient-to-r from-teal-50 to-teal-100">
             <div className="absolute inset-0">
-              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1456735190827-d1262f71b8a3?q=80&w=1920&auto=format&fit=crop')] bg-cover bg-center opacity-20"></div>
+              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1456735190827-d1262f71b8a3?q=80&w=1920&auto=format&fit=crop&ixlib=rb-4.0.3')] bg-cover bg-center opacity-20"></div>
               <div className="absolute inset-0 bg-gradient-to-r from-teal-500/30 via-transparent to-teal-500/10"></div>
             </div>
             <div className="relative z-10 flex h-full items-center">
@@ -43,10 +43,11 @@ export default function Home() {
                     <div className="relative overflow-hidden rounded-lg shadow-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.01]">
                       <Image
                         src="https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3"
-                        alt="Produtos de papelaria coloridos"
-                        width={400}
-                        height={400}
-                        className="rounded-lg object-cover"
+                        alt="Papelaria"
+                        width={1470}
+                        height={800}
+                        className="object-cover"
+                        priority
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent opacity-60"></div>
                     </div>

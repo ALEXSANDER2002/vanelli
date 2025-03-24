@@ -5,25 +5,26 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 187 100% 23%;
+    --foreground: 185 100% 23%;
     --card: 0 0% 100%;
-    --card-foreground: 187 100% 23%;
+    --card-foreground: 185 100% 23%;
     --popover: 0 0% 100%;
-    --popover-foreground: 187 100% 23%;
-    --primary: 187 100% 23%;
+    --popover-foreground: 185 100% 23%;
+    --primary: 185 100% 23%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 173 35% 64%;
-    --secondary-foreground: 187 100% 23%;
-    --muted: 187 50% 95%;
-    --muted-foreground: 187 100% 23%;
-    --accent: 84 75% 64%;
-    --accent-foreground: 187 100% 23%;
-    --destructive: 0 84% 71%;
+    --primary-hover: 185 89% 20%;
+    --secondary: 174 35% 64%;
+    --secondary-foreground: 185 100% 23%;
+    --muted: 185 50% 95%;
+    --muted-foreground: 185 100% 23%;
+    --accent: 90 75% 64%;
+    --accent-foreground: 185 100% 23%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 187 10% 90%;
-    --input: 187 10% 90%;
-    --ring: 187 100% 23%;
-    --radius: 1rem;
+    --border: 185 50% 95%;
+    --input: 185 50% 95%;
+    --ring: 185 100% 23%;
+    --radius: 0.5rem;
   }
 }
 
@@ -60,11 +61,7 @@
 
 /* Estilo para cards com sombra suave */
 .card-hover-effect {
-  @apply transition-all duration-300 shadow-sm;
-}
-
-.card-hover-effect:hover {
-  @apply shadow-lg transform -translate-y-1;
+  @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
 }
 
 /* Estilo para links com underline animado */
@@ -93,6 +90,7 @@
 }
 
 .fade-in {
+  opacity: 0;
   animation: fadeIn 0.5s ease-out forwards;
 }
 
@@ -135,7 +133,7 @@
 
 /* Estilo para botões de ação principal */
 .primary-action-button {
-  @apply bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary shadow-md hover:shadow-lg transition-all duration-300;
+  @apply bg-primary text-primary-foreground hover:bg-primary-hover transition-colors;
 }
 
 /* Estilos para animações de produtos */

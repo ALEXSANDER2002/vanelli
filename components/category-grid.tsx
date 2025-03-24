@@ -6,7 +6,7 @@ const categories = [
   {
     id: 1,
     name: "Material Escolar",
-    image: "https://images.unsplash.com/photo-1519687079572-8a38a2d9f6a5?q=80&w=120&h=120&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1452860606245-08befc0ff44b?q=80&w=120&h=120&auto=format&fit=crop&ixlib=rb-4.0.3",
     slug: "material-escolar",
     color: "bg-blue-50 border-blue-200 group-hover:bg-blue-100",
     icon: "bg-blue-500/10",
@@ -14,7 +14,7 @@ const categories = [
   {
     id: 2,
     name: "Escritório",
-    image: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?q=80&w=120&h=120&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?q=80&w=120&h=120&auto=format&fit=crop&ixlib=rb-4.0.3",
     slug: "escritorio",
     color: "bg-teal-50 border-teal-200 group-hover:bg-teal-100",
     icon: "bg-teal-500/10",
@@ -22,7 +22,7 @@ const categories = [
   {
     id: 3,
     name: "Mochilas",
-    image: "https://images.unsplash.com/photo-1577401239170-897942555fb3?q=80&w=120&h=120&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a45?q=80&w=120&h=120&auto=format&fit=crop&ixlib=rb-4.0.3",
     slug: "mochilas",
     color: "bg-purple-50 border-purple-200 group-hover:bg-purple-100",
     icon: "bg-purple-500/10",
@@ -30,7 +30,7 @@ const categories = [
   {
     id: 4,
     name: "Cadernos",
-    image: "https://images.unsplash.com/photo-1544239265-ee5eedde5469?q=80&w=120&h=120&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1517842645767-c639042777db?q=80&w=120&h=120&auto=format&fit=crop&ixlib=rb-4.0.3",
     slug: "cadernos",
     color: "bg-green-50 border-green-200 group-hover:bg-green-100",
     icon: "bg-green-500/10",
@@ -38,7 +38,7 @@ const categories = [
   {
     id: 5,
     name: "Artesanato",
-    image: "https://images.unsplash.com/photo-1535016120720-40c646be5580?q=80&w=120&h=120&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?q=80&w=120&h=120&auto=format&fit=crop&ixlib=rb-4.0.3",
     slug: "artesanato",
     color: "bg-rose-50 border-rose-200 group-hover:bg-rose-100",
     icon: "bg-rose-500/10",
@@ -46,7 +46,7 @@ const categories = [
   {
     id: 6,
     name: "Agendas",
-    image: "https://images.unsplash.com/photo-1506784365847-bbad939e9335?q=80&w=120&h=120&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1506784365847-bbad939e9335?q=80&w=120&h=120&auto=format&fit=crop&ixlib=rb-4.0.3",
     slug: "agendas",
     color: "bg-amber-50 border-amber-200 group-hover:bg-amber-100",
     icon: "bg-amber-500/10",

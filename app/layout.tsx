@@ -13,6 +13,7 @@ import { WhatsAppButton } from "@/components/whatsapp-button"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
+  title: "Papelaria Vanelli",
   title: "Papelaria Vanelli - Marabá | Sua papelaria completa",
   description: "A melhor papelaria de Marabá-PA com produtos para escritório, escola e artesanato. Entrega rápida para toda a cidade.",
   generator: 'v0.dev'
