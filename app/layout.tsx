@@ -13,36 +13,38 @@ import { WhatsAppButton } from "@/components/whatsapp-button"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Papelaria Vanelli",
-  title: "Papelaria Vanelli - Marabá | Sua papelaria completa",
-  description: "A melhor papelaria de Marabá-PA com produtos para escritório, escola e artesanato. Entrega rápida para toda a cidade.",
-  generator: 'v0.dev'
+    title: "Papelaria Vanelli",
+    description: "A melhor papelaria de Marabá-PA com produtos para escritório, escola e artesanato. Entrega rápida para toda a cidade.",
+    generator: 'v0.dev'
 }
 
 export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
+                                       children,
+                                   }: Readonly<{
+    children: React.ReactNode
 }>) {
-  return (
-    <html lang="pt-BR">
-      <body className={inter.className}>
+    return (
+        <html lang="pt-BR">
+        <head>
+            <link rel="icon" href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vanellimag%20%282%29-0pUdczIj2dBkRohUK7qUHNRx5Ptkil.png" />
+        </head>
+        <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="light">
-          <AuthProvider>
-            <CartProvider>
-              <Navbar />
-              <main>
-                {children}
-              </main>
-              <Footer />
-              <WhatsAppButton />
-              <Toaster />
-            </CartProvider>
-          </AuthProvider>
+            <AuthProvider>
+                <CartProvider>
+                    <Navbar />
+                    <main>
+                        {children}
+                    </main>
+                    <Footer />
+                    <WhatsAppButton />
+                    <Toaster />
+                </CartProvider>
+            </AuthProvider>
         </ThemeProvider>
-      </body>
-    </html>
-  )
+        </body>
+        </html>
+    )
 }
 
 
